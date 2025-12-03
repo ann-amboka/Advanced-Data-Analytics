@@ -1,0 +1,17 @@
+/* PERFOM A CHANGE OVER TIME ANALYSIS OF OUR BUSINESS
+=====================================================
+Get the Total Sales Over the Years
+Average Costs
+Total Ordrs
+Number of customers over the years */
+
+SELECT
+Year(OrderDate) AS OrderYear,
+SUM(Sales) AS TotalSales,
+SUM(GrossProfit) AS TotalGross,
+AVG(Cost) AS AvgCost,
+COUNT(DISTINCT CustomerID) AS TotalCustomers,
+COUNT(OrderID) AS TotalOrders
+FROM Gold.Fact_Sales
+GROUP BY Year(OrderDate)
+ORDER BY Year(OrderDate)
