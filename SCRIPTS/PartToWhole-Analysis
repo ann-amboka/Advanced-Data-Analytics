@@ -17,7 +17,7 @@ SUM(TotalSales) OVER() AS OverallSales,
 CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') AS PercentageOfSales
 FROM ProductSales
 ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
-
+;
 ---FOR DIVISIONS
 WITH DivisionSales AS (
     SELECT
@@ -32,7 +32,7 @@ SUM(TotalSales) OVER() AS OverallSales,
 CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') AS PercentageOfSales
 FROM DivisionSales 
 ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
-
+;
 --FOR COUNTRIES
 WITH CountrySales AS (
     SELECT
@@ -47,7 +47,7 @@ SUM(TotalSales) OVER() AS OverallSales,
 CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') AS PercentageOfSales
 FROM CountrySales
 ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
-
+;
 ---FOR THE REGIONS
 WITH RegionSales AS (
     SELECT
@@ -62,7 +62,7 @@ SUM(TotalSales) OVER() AS OverallSales,
 CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') AS PercentageOfSales
 FROM RegionSales
 ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
-
+;
 --================================================================================--
 --BY COUNTRY--
 WITH UnitsSold AS (
@@ -77,6 +77,7 @@ SELECT
 SUM(TotalUnitsSold) OVER () AS OverallUnitsSold,
 CONCAT(ROUND((CAST(TotalUnitsSold AS FLOAT)/SUM(TotalUnitsSold) OVER ()) *100,2),'%') AS Percentageofwhole
 FROM UnitsSold
+;
 --==========================================================================================================--
 ---BY DIVISION--
 WITH UnitsSold AS (
@@ -91,7 +92,7 @@ SELECT
 SUM(TotalUnitsSold) OVER () AS OverallUnitsSold,
 CONCAT(ROUND((CAST(TotalUnitsSold AS FLOAT)/SUM(TotalUnitsSold) OVER ()) *100,2),'%') AS Percentageofwhole
 FROM UnitsSold
-
+;
 ---BY REGION---
 WITH UnitsSold AS (
 SELECT
