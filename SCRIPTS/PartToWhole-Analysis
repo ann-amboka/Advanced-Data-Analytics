@@ -7,7 +7,7 @@ This shows the contribution of measures by dimension on a bigger scale
 ;WITH ProductSales AS (
     SELECT
         ProductName,
-        SUM(Sales) AS TotalSales
+        SUM(Sales*Units) AS TotalSales
     FROM Gold.Fact_Sales
     GROUP BY ProductName
 )
@@ -22,7 +22,7 @@ ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
 WITH DivisionSales AS (
     SELECT
         Division,
-        SUM(Sales) AS TotalSales
+        SUM(Sales*Units) AS TotalSales
     FROM Gold.Fact_Sales
     GROUP BY Division
 )
@@ -37,7 +37,7 @@ ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
 WITH CountrySales AS (
     SELECT
         Country,
-        SUM(Sales) AS TotalSales
+        SUM(Sales*Units) AS TotalSales
     FROM Gold.Fact_Sales
     GROUP BY Country
 )
@@ -52,7 +52,7 @@ ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
 WITH RegionSales AS (
     SELECT
         Region,
-        SUM(Sales) AS TotalSales
+        SUM(Sales*Units) AS TotalSales
     FROM Gold.Fact_Sales
     GROUP BY Region
 )
@@ -68,7 +68,7 @@ ORDER BY CONCAT(ROUND((TotalSales/SUM(TotalSales) OVER())*100,2),'%') DESC
 WITH UnitsSold AS (
 SELECT
 Country,
-COUNT(Units) AS TotalUnitsSold
+SUM(Units) AS TotalUnitsSold
 FROM Gold.Fact_Sales
 GROUP BY Country
 )
@@ -82,7 +82,7 @@ FROM UnitsSold
 WITH UnitsSold AS (
 SELECT
 Division,
-COUNT(Units) AS TotalUnitsSold
+SUM(Units) AS TotalUnitsSold
 FROM Gold.Fact_Sales
 GROUP BY Division
 )
@@ -96,7 +96,7 @@ FROM UnitsSold
 WITH UnitsSold AS (
 SELECT
 Region,
-COUNT(Units) AS TotalUnitsSold
+SUM(Units) AS TotalUnitsSold
 FROM Gold.Fact_Sales
 GROUP BY Region
 )
