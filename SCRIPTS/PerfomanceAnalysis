@@ -1,17 +1,17 @@
 --Compare The Best Years
 --How are our sales over the years
-*/
+
 
 SELECT
 FS.CustomerID,
 FS.ProductID,
-SUM(FS.Sales)AS TotalSales,
+SUM(FS.Sales*FS.Units)AS TotalSales,
 FS.Region,
 T.Division,
 CASE 
-	WHEN T.Division = 'Chocolate' AND SUM(FS.Sales) >= 27000 THEN 'TargetMet'
-	WHEN T. Division = 'Sugar' AND SUM(FS.Sales) >= 15000 THEN 'TargetMet'
-	WHEN T.Division = 'Other' AND SUM(FS.Sales) >= 3000 THEN 'TargetMet'
+	WHEN T.Division = 'Chocolate' AND SUM(FS.Sales*FS.Units) >= 27000 THEN 'TargetMet'
+	WHEN T. Division = 'Sugar' AND SUM(FS.Sales*FS.Units) >= 15000 THEN 'TargetMet'
+	WHEN T.Division = 'Other' AND SUM(FS.Sales*FS.Units) >= 3000 THEN 'TargetMet'
 	ELSE 'Not Met'
 END AS TargetStatus,
 T.Target,
@@ -31,16 +31,16 @@ GROUP BY FS.CustomerID,
 	P.ProductName,
 	P.Factory,
 	FS.Country
-
+;
 ---Performance Over the Years(YEAR OF YEAR ANALYSIS)
 SELECT
 Year(OrderDate) AS OrderDateYear,
-SUM(Sales) AS CurrentTotalSales,
-LAG(SUM(Sales)) OVER (ORDER BY Year(OrderDate)) AS PreviousYearSales,
-SUM(Sales)-LAG(SUM(Sales)) OVER (ORDER BY Year(OrderDate)) AS DifferenceInSales,
+SUM(Sales*Units) AS CurrentTotalSales,
+LAG(SUM(Sales*Units)) OVER (ORDER BY Year(OrderDate)) AS PreviousYearSales,
+SUM(Sales*Units)-LAG(SUM(Sales*Units)) OVER (ORDER BY Year(OrderDate)) AS DifferenceInSales,
 CASE 
-	WHEN SUM(Sales)-LAG(SUM(Sales)) OVER (ORDER BY Year(OrderDate)) > 0 THEN 'Increasing'
-	WHEN SUM(Sales)-LAG(SUM(Sales)) OVER (ORDER BY Year(OrderDate)) < 0 THEN 'Decreasing'
+	WHEN SUM(Sales*Units)-LAG(SUM(Sales*Units)) OVER (ORDER BY Year(OrderDate)) > 0 THEN 'Increasing'
+	WHEN SUM(Sales*Units)-LAG(SUM(Sales*Units)) OVER (ORDER BY Year(OrderDate)) < 0 THEN 'Decreasing'
 	ELSE'No Change'
 END AS PreviousYearChange
 FROM Gold.Fact_Sales
