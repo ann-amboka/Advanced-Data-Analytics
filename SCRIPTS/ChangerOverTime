@@ -7,8 +7,8 @@ Number of customers over the years */
 
 SELECT
 Year(OrderDate) AS OrderYear,
-SUM(Sales) AS TotalSales,
-SUM(GrossProfit) AS TotalGross,
+SUM(Sales*Units) AS TotalSales,
+SUM(GrossProfit*Units) AS TotalGross,
 AVG(Cost) AS AvgCost,
 COUNT(DISTINCT CustomerID) AS TotalCustomers,
 COUNT(OrderID) AS TotalOrders
