@@ -5,7 +5,7 @@ CUSTOMER SEGMENTATION
 You’re grouping customers based on how profitable they are, how often they buy, and where they’re located.
 In your sample: a San Francisco customer ordering chocolate bars.
 ===================================================================================================*/
-CREATE VIEW CustomerSeg AS
+
 WITH Csegments AS
 (
 SELECT
@@ -23,8 +23,7 @@ FROM Gold.Fact_Sales
 SELECT
 *,
 TotalRevenue/TotalOrders AS AvgOrderValue
-FROM Csegments
-
+FROM Csegments;
 
 SELECT
 CustomerID,
@@ -35,7 +34,7 @@ CASE WHEN COUNT(OrderID)> 10 THEN 'HighValue'
 	 ELSE 'OneTimeBuyer'
 END AS CustomerValue
 FROM Customerseg
-GROUP BY CustomerID
+GROUP BY CustomerID;
 
 --Region-based clusters (Pacific vs others)
 SELECT
@@ -43,7 +42,7 @@ Region,
 SUM(Units) as ProductSold
 FROM Gold.Fact_Sales
 GROUP BY Region
-ORDER BY SUM(Units) DESC
+ORDER BY SUM(Units) DESC;
 
 
 --2. Product Segmentation
