@@ -4,7 +4,7 @@ This shows the contribution of measures by dimension on a bigger scale
 */
 --==================================================--
 --FOR PRODUCTS
-;WITH ProductSales AS (
+WITH ProductSales AS (
     SELECT
         ProductName,
         SUM(Sales*Units) AS TotalSales
