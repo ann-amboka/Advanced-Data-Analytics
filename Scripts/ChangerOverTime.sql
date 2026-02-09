@@ -2,7 +2,7 @@
 =====================================================
 Get the Total Sales Over the Years
 Average Costs
-Total Ordrs
+Total Orders
 Number of customers over the years */
 
 SELECT
